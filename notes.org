@@ -7,7 +7,7 @@
 #+OPTIONS: H:2 toc:nil
 #+LaTeX_CLASS: beamer
 #+LaTeX_CLASS_OPTIONS: [presentation]
-#+BEAMER_THEME: Boadilla
+#+BEAMER_THEME: Frankfurt
 #+LaTeX_HEADER: \titlegraphic{\includegraphics[height=.4\textheight]{img/csf_networks_selfsim.png}}
 
 #+LaTeX_header: \input{local_defs}
@@ -34,7 +34,7 @@
 - At each node, angles: \(2\pi/3\)
 - Triple condition:
   \[
-  \ip{T^+}{-T^-} = \ip{T^{\pm}}{T_L} = -\frac{1}{2}
+  \ip{T^+}{-T^-} = -\frac{1}{2}
   \]
 
 ** Skeleton and Dihedral Symmetry
@@ -126,9 +126,9 @@ No convex networks for \(k > 6\)!
      :BEAMER_col: 0.5
      :END:
 
-- Self similar solutions Chen-Guo '07
-  - There exists a unique \(D_k\) symmetric self-similar network \pause
-  - Fish and Rocket in 2 and 3 nodes resp. are the only non-\(D_k\) symmetric self similar solutions
+Self similar solutions Chen-Guo '07
+- There exists a unique \(D_k\) symmetric self-similar network \pause
+- Fish and Rocket in 2 and 3 nodes resp. are the only non-\(D_k\) symmetric self similar solutions
 
 ** Some Theorems
 
@@ -183,8 +183,8 @@ A /concave like point/ \(x = \ell(p,q)\) is one where there exists a concave low
 [[file:img/optimal_smooth.png]]
 
 - Concave like points are regular (i.e. not nodes) \pause
-  - Topological considerations such as whether \(w = \gamma(q) - \gamma(p)\) points in or out and whether \(T_q = T_q\) or \(w\) bisects \(T_p\), \(T_q\) do not come into play at concave like points. \pause
-  - Compare smooth case (Andrews-B '09) and Huisken '95.
+- Topological considerations such as whether \({\color{green} w = \gamma(q) - \gamma(p)}\) points in or out and whether \(T_q = T_q\) or \(w\) bisects \(T_p\), \(T_q\) do not come into play at concave like points. \pause
+- Compare smooth case (Andrews-B '09) and Huisken '95.
 
 ** Viscosity Equation for networks
 
@@ -228,8 +228,6 @@ then
 \[
 \left(\frac{L}{2\pi}\right)^2 \max_{\gamma} \curvecurv^2 \leq c(t).
 \]
-\pause
-
 #+END_theorem
 
 ** Network CSF Comparison theorem
