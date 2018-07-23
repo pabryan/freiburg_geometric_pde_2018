@@ -1,102 +1,207 @@
-#+OPTIONS: toc:nil title:nil
+#+TITLE: Curve Shortening of Networks
+#+BEAMER_HEADER: \subtitle{Geometric PDE's, Freiburg July 2018 (Joint with Mariel Sáez)}
+#+AUTHOR: Paul Bryan
+#+DATE:
+#+SETUPFILE: ~/.emacs.d/org-templates/bibliography.org
+
+#+OPTIONS: H:2 toc:nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+BEAMER_THEME: Boadilla
+#+LaTeX_HEADER: \titlegraphic{\includegraphics[height=.4\textheight]{img/csf_networks_selfsim.png}}
+
 #+LaTeX_header: \input{local_defs}
+
 
 * Networks
 
-- Joint with Mariel Sáez
-- Picture of networks and nodes with triple condition
-- Choose an orientation
+** Networks
+
+**** Image
+     :PROPERTIES:
+     :BEAMER_col: 0.5
+     :END:
+
+[[file:img/node.png]]
+
+**** Text
+     :PROPERTIES:
+     :BEAMER_col: 0.5
+     :END:
+
+- Single loop with \(k\) nodes.
+- Unbound lines asymptotically flat or boundary lying on \(\partial \Omega\) (\(\Omega\) convex body) \pause
+- At each node, angles: \(2\pi/3\)
 - Triple condition:
   \[
   \ip{T^+}{-T^-} = \ip{T^{\pm}}{T_L} = -\frac{1}{2}
   \]
-- Angles = \(2\pi/3\)
-- Loops and unbounded lines
-- Skeleton
-- For this talk restrict to dihedrally symmetric
+
+** Skeleton and Dihedral Symmetry
+
+**** Image
+     :PROPERTIES:
+     :BEAMER_col: 0.5
+     :END:
+
+[[file:img/regularpolygon.png]]
+
+**** Text
+     :PROPERTIES:
+     :BEAMER_col: 0.5
+     :END:
+
+- Skeleton = polygon formed from nodes
+- For this talk, restrict to networks symmetric under dihedral group \(D_k\)
+- Skeleton is preserved along the flow (up to scaling) since \(D_k\) acts by isometry
 
 * Network CSF
 
-- \(\ip{\partial_t \gamma}{N} = -\kappa\)
-- \(\partial_t \gamma = - \kappa N + v T\)
+** Curve Shortening of Networks
+
+\[
+\ip{\partial_t \gamma}{N} = -\kappa \Rightarrow \partial_t \gamma = - \kappa N + v T
+\]
+
+\pause
+
 - At a node: \(-\kappa^+ N^+ + v^+ T^+ = -\kappa^- N^- + v^- T^-\)
 - At a node, can solve for \(v\) in terms of \(\kappa\):
   \[
   v^+ = \frac{2}{\sqrt{3}} \kappa^- - \frac{1}{\sqrt{3}} \kappa^+, \quad v^- = -\frac{2}{\sqrt{3}} \kappa^+ + \frac{1}{\sqrt{3}} \kappa^-
   \]
-  and
-  \[
-  \kappa^+ = -\frac{2}{\sqrt{3}} v^- + \frac{1}{\sqrt{3}} v^+, \quad \kappa^- = \frac{2}{\sqrt{3}} v^+ - \frac{1}{\sqrt{3}} v^-.
-  \]
+  \pause
 - Corner speed difference:
   \[
   \Delta v = v^+ - v^- = \frac{1}{\sqrt{3}} (\kappa^- + \kappa^+)
   \]
-- Note evolution equations different from smooth case
-  \[
-  [\partial_s, \partial_t] = -(\partial_s v - \kappa^2) \partial_s
-  \]
-  and
-  \[
-  \partial_t \kappa = \partial_s^2 \kappa + \kappa^3 + v \partial_s \kappa
-  \]
+
+** Evolution Equations
+
+Evolution equations differ from smooth case:
+
+\[
+[\partial_s, \partial_t] = -(\partial_s v - \kappa^2) \partial_s
+\]
+\pause
+
+- \(\partial_t \kappa = \partial_s^2 \kappa + \kappa^3 + v \partial_s \kappa\) \pause
+- \(\partial_t \ell(p,q) = \Delta Q(p, q) + v(q) - v(p)\)
+  - \(\Delta Q(p, q) := -\int_p^q \kappa^2 ds + \sum_{i \in I(p,q)} \Delta v_i\)
+  - \(I(p,q)\) sum over nodes between \(p\) and \(q\) \pause
+- \(\partial_t L = \bar{Q}\)
+  - \(\bar{Q} := - \int_{\gamma} \kappa^2 ds + \sum_{i=1}^k \Delta v_i\) \pause
+- \(\partial_t \text{Area} = -(2 - k/3)\pi + \sum \ip{\gamma}{\kappa_i^+ T_i^+ - \kappa_i^- T_i^-}\)
+
+** Remarks on convexity, contraction/expansion
+
+Recall \(\partial_t \text{Area} = -(2 - k/3)\pi + \sum \ip{\gamma}{\kappa_i^+ T_i^+ - \kappa_i^- T_i^-}\)
+
+- For \(k > 6\), the first term could be positive and area increases. Expanding!
+\pause
+
+Gauss-Bonnet: \(\int_{\gamma} \kappa = (2-k/3) \pi\).
+
+- For \(k=6\): \(\int_{\gamma} \kappa = 0\).
+- Convexity occurs only for polygonal solutions! \pause
+- Self-sim solution is in fact a static regular hexagon.
+- Perturb unbounded lines should break convexity hence it's unstable! \pause
+- But it is stable under \(D_k\) preserving perturbations of the loop. \pause
+
+No convex networks for \(k > 6\)!
 
 * Some Theorems
 
-- Existence/uniqueness derived from local version by Bronsard-Reitich '93
+** Self-Similar Solutions
+
+**** Image
+     :PROPERTIES:
+     :BEAMER_col: 0.5
+     :END:
+
+[[file:img/selfsimilarregularpolygon.png]]
+
+**** Text
+     :PROPERTIES:
+     :BEAMER_col: 0.5
+     :END:
+
 - Self similar solutions Chen-Guo '07
-  - There exists a unique dihedrally symmetric self-sim network
-  - Fish and Rocket in 2 and 3 nodes resp. are the only non \(D_k\) symmetric self similar solutions
-- Schnurer, Schulze, Saez et. al '11 proved convex networks with $k=2$ converge to self-similar (dist. comp.)
+  - There exists a unique \(D_k\) symmetric self-similar network \pause
+  - Fish and Rocket in 2 and 3 nodes resp. are the only non-\(D_k\) symmetric self similar solutions
+
+** Some Theorems
+
+- Existence/uniqueness derived from local version by Bronsard-Reitich '93 \pause
+- Schnurer, Schulze, Saez et. al '11 proved convex networks with $k=2$ converge to self-similar (dist. comp.) \pause
 - CSF of graphs with prescribed angles converges to self-simlar Chen-Guo '11
-- Therefore \(D_k\) graphs converge to self-similar (not observed in the literature!)
+  - Therefore \(D_k\) graphs converge to self-similar (not observed in the literature!) \pause
 - See excellent article by Mantegazza-Novoga-Pluda-Schulze
-
-* Remarks on convexity, contraction/expansion
-
-- \(\partial_t \ell(p,q) = \Delta Q(p, q) + v(q) - v(p)\)
-  - where \(\Delta Q(p, q) = -\int_p^q \kappa^2 ds + \sum_{i \in I(p,q)} \Delta v_i\) sum over nodes between \(p\) and \(q\)
-- \(\partial_t L = \bar{Q} := - \int_{\gamma} \kappa^2 ds + \sum_{i=1}^k \Delta v_i\)
-- \(\partial_t \text{Area} = -(2 - k/3)\pi + \sum \ip{\gamma}{\kappa_i^+ T_i^+ - \kappa_i^- T_i^-}\)
-- For \(k > 6\), the first term could be positive and area increases! Expanding
-- Gauss-Bonnet: \(\int_{\gamma} \kappa = (2-k/3) \pi\). For \(k=6\), \(\int_{\gamma} \kappa = 6\) so convexity occurs only for polygonal solutions! The self-sim solution is in fact a static regular hexagon. Perturb unbounded lines should break convexity hence it's unstable! No convex networks for \(k > 6\).
-- But it is stable under perturbations of loop by Chen-Guo
 
 * Chord-arc profile
 
-- \(Z(x) = \frac{L_k}{L} \inf \{d(p, q) : \ell(p,q) = \frac{L}{L_k} x\}\) for \(x \in [0, L_k]\)
-- \(L_k\) is canonical self-similar length \(\ip{\gamma}{N} = \kappa\).
-- Rem: In non-dihedrally symmetric include some terms for unbounded lines also
+** Chord-arc Profile
 
-- Prop:
-  \[
-  \lim_{x\to 0} \frac{\chordarcprofile(x) - \tfrac{\sqrt{3}}{2}x}{x^2} = - \frac{L}{16 L_k} \max_i \{\curvecurv^+(a_i) + \curvecurv^-(a_i)\}
-  \]
-- Compare smooth case
-  \[
-  \lim_{x\to 0} \frac{\chordarcprofile(x) - x}{x^3} = - \frac{L^2}{24 \cdot (2\pi)^2} \max_{\gamma} \kappa^2
-  \]
-- Concentration around maximum curvature!
+#+BEGIN_definition
+\(Z(x) = \frac{L_k}{L} \inf \{d(p, q) : \ell(p,q) = \frac{L}{L_k} x\}\) for \(x \in [0, L_k]\)
+#+END_definition
+
+- \(L_k\) is canonical self-similar length \(\ip{\gamma}{N} = \kappa\). \pause
+- Non-\(D_k\) symmetric: include some terms for unbounded lines \pause
+
+#+BEGIN_lemma
+\[
+\lim_{x\to 0} \frac{\chordarcprofile(x) - \tfrac{\sqrt{3}}{2}x}{x^2} = -\frac{1}{16} \frac{L}{L_k} \max_i \{\curvecurv^+(a_i) + \curvecurv^-(a_i)\}
+\]
+#+END_lemma
+
+** The smooth case
+
+Network case
+\[
+\lim_{x\to 0} \frac{\chordarcprofile(x) - \tfrac{\sqrt{3}}{2}x}{x^2} = -\frac{1}{16} \frac{L}{L_k} \max_i \{\curvecurv^+(a_i) + \curvecurv^-(a_i)\}
+\]
+\pause
+
+The smooth case
+\[
+\lim_{x\to 0} \frac{\chordarcprofile(x) - x}{x^3} = - \frac{1}{24} \left(\frac{L}{2\pi}\right)^2 \max_{\gamma} \kappa^2
+\]
+\pause
+
+- Concentration around maximum curvature! \pause
 - Also note \(x^2\) instead of \(x^3\) occurs because the second derivative of \(d^2\) at a node picks up corner angle
 
-* Viscosity Equation for networks
+** Concavity
 
-#+BEGIN_defn
+#+BEGIN_definition
 A /concave like point/ \(x = \ell(p,q)\) is one where there exists a concave lower barrier to \(\chordarcprofile\) and \(x\).
-#+END_defn
+#+END_definition
+\pause
 
-- Concave like points are regular (i.e. not nodes)
-- Topological considerations such as whether \(w = \gamma(q) - \gamma(p)\) points in or out and whether \(T_q = T_q\) or \(w\) bisects \(T_p\), \(T_q\) do not come into play at concave like points. Compare smooth case and Huisken.
-- At concave like points:
-  \[
-  -\frac{\chordarcprofile''}{\sqrt{1-(\chordarcprofile')^2}} \geq -\frac{L}{8\pi} \left[\curvecurv_p + \curvecurv_q\right].
-  \]
-- Remark, in general there are other terms but it's sufficient to consider only concave like points.
-- That is, if an evolving concave function lies below the evolving profile, the first touching point is concave like.
+#+ATTR_LATEX: :height .3\textheight
+[[file:img/optimal_smooth.png]]
+
+- Concave like points are regular (i.e. not nodes) \pause
+  - Topological considerations such as whether \(w = \gamma(q) - \gamma(p)\) points in or out and whether \(T_q = T_q\) or \(w\) bisects \(T_p\), \(T_q\) do not come into play at concave like points. \pause
+  - Compare smooth case (Andrews-B '09) and Huisken '95.
+
+** Viscosity Equation for networks
+
+#+BEGIN_lemma
+ At concave like points:
+\[
+-\frac{\chordarcprofile''}{\sqrt{1-(\chordarcprofile')^2}} \geq -\frac{L}{8\pi} \left[\curvecurv_p + \curvecurv\right].
+\]
+#+END_lemma
+
+\pause
+
+- In general there are other terms but it's sufficient to consider only concave like points. \pause
+- That is, if an evolving concave function lies below the evolving profile, the first touching point is concave like. \pause
 - For convex networks, all points are concave like.
-  - Show picture where optimal points cross a node, but if you start at a node it's just like the smooth case, and this is less optimal than crossing a node.
 
-* CSF viscosity equation
+** CSF viscosity equation
 
 #+BEGIN_theorem
 Let $\gamma$ be the loop of a network evolving by the Curve Shortening Flow. Then at a concave like point points, the Chord-Arc profile $\gamma$ satisfies the following viscosity equation
@@ -105,13 +210,37 @@ Let $\gamma$ be the loop of a network evolving by the Curve Shortening Flow. The
 \]
 #+END_theorem
 
-* CSF Comparison theorem
+* Comparison
+** Smooth CSF Comparison theorem (Andrews, B- '11)
 
 #+BEGIN_theorem
 If an evolving concave function \(\varphi\) touches \(Z\) at \(x_0, t_0\) from below, then
 \[
 \partial_t \varphi \leq 4 \left(\frac{L_k}{L}\right)^2 \varphi'' + \frac{1}{L} \bar{Q} (\varphi - x \varphi') + \frac{L_k}{L} \Delta Q \varphi'
 \]
+\pause
+
+If in addition,
+\[
+\varphi_0(x, t) = \frac{\sqrt{3}}{2} x - c(t) x^3 + \bigo(x^3) \quad \text{as} \quad x \to 0
+\]
+then
+\[
+\left(\frac{L}{2\pi}\right)^2 \max_{\gamma} \curvecurv^2 \leq c(t).
+\]
+\pause
+
+#+END_theorem
+
+** Network CSF Comparison theorem
+
+#+BEGIN_theorem
+If an evolving concave function \(\varphi\) touches \(Z\) at \(x_0, t_0\) from below, then
+\[
+\partial_t \varphi \leq 4 \left(\frac{L_k}{L}\right)^2 \varphi'' + \frac{1}{L} \bar{Q} (\varphi - x \varphi') + \frac{L_k}{L} \Delta Q \varphi'
+\]
+\pause
+
 If in addition,
 \[
 \varphi_0(x, \tau) = \frac{\sqrt{3}}{2} x - c(\tau) x^2 + \bigo(x^3) \quad \text{as} \quad x \to 0
@@ -120,23 +249,11 @@ then
 \[
 \frac{L}{L_k} \max_i \{\curvecurv^+_i(t) + \curvecurv^-_i(t)\} \leq 16 c(\tau(t)).
 \]
-for all $t$.
 #+END_theorem
 
-Recall
-\[
-\bar{Q} = - \int_{\gamma} k^2 ds + \sum_{i=1}^k \Delta v_i
-\]
-and
-\[
-\Delta (p,q) = - \int_p^q k^2 ds + \sum_{i \in I(p,q)} \Delta v_i
-\]
-with \(I(p,q)\) the nodes between \(p\) and \(q\).
+** Smooth Comparison Functions (Andrews, B- '11)
 
-* Comparison Functions
-
-- Linearise around the self-similar solution!
-- Let \(\psi_0\) denote the self-similar profile.
+- Linearise around the self-similar solution (i.e. round circle), \(\psi_0 = 2 \sin(x/2)\)! \pause
 
 Let
 \[
@@ -144,28 +261,61 @@ Let
 \]
 where
 \[
-u \Phi'' + (1 - \Phi')\Phi' \geq 0, \quad u = e^{-t} \psi_0(x).
+u \Phi'' + 2 (1 - \Phi')\Phi' = 0, \Phi(0) = 0. \quad u = e^{-t} \psi_0(x).
+\]
+\pause
+
+- Then \(\varphi\) /automatically/ satisfies the comparison differential inequality with the correct asymptotics! \pause
+
+- The *mysterious comparison function*
+  \[
+  \varphi(x, t) = e^t \Phi(e^{-t} \psi_0(x)) = C e^t \arctan((2/C) e^{-t} \sin(x/2)).
+  \]
+
+** Comparison Functions
+
+- Linearise around the self-similar solution, \(\psi_0\)! \pause
+
+Let
+\[
+\varphi(x, t) = e^t \Phi(e^{-t} \psi_0(x))
+\]
+where
+\[
+u \Phi'' + (1 - \Phi')\Phi' \geq 0, \Phi(0) = 0. \quad u = e^{-t} \psi_0(x).
+\]
+\pause
+
+- Then \(\varphi\) satisfies the comparison differential inequality. \pause
+
+- \(\Phi(u) = u + C u^3 + \bigo(u^4)\)
+\[
+\psi_0(x) = \frac{\sqrt{3}}{2} x + a x^2 + \bigo(x^3).
+\]
+\pause
+
+\[
+\varphi(x, t) = \frac{\sqrt{3}}{2} x + (a + C e^{-t}) x^2 + \bigo(x^3) \underset{t\to \infty}{\to} \psi_0(x)
 \]
 
-- Then \(\varphi\) satisfies the comparison differential inequality.
-- \(\Phi(u) = u + C u^3 + \bigo(u^4)\)
-- \(\psi_0\) already has the correct asymptotic behaviour:
-  \[
-  \psi_0(x) = \frac{\sqrt{3}}{2} x + a x^2 + \bigo(x^3).
-  \]
-- We immediately get
-  \[
-  \varphi(x, t) = \frac{\sqrt{3}}{2} x + (a + C e^{-t}) x^2 + \bigo(x^3) \to_{t\to \infty} \psi_0(x) + \bigo(x^3)
-  \]
+** Convergence Theorem
 
-We need some stability results of self-similar solutions which are not precise yet. So we restrict to a \(D_k\) symmetric solutions in a "suitable" neighbourhood of the self-similar solution (we think this is the entire space!). Modulo these:
+- We need some stability results of self-similar solutions which are not precise yet. Comparison of \(\Delta Q\) and \(\bar{Q}\) is sufficient. Self-similar is optimal.
+
+- So we restrict to a \(D_k\) symmetric solutions in a "suitable" neighbourhood of the self-similar solution (we think this is the entire space!). Modulo these:
 
 #+BEGIN_theorem
 Let \(\gamma\) be a \(D_k\) symmetric network evolving under CSF. Then \(\gamma\) collapses to a point in finite time and rescaling to fix length, converges smoothly to the unique \(D_k\) self-similar solution.
 #+END_theorem
-* Next
 
-- Remove stability requirements
+\pause
+
+- The theorem strictly enlarges the class of Chen-Guo which are only graphs over the skeleton.
+
+** What's Next ?
+
+- Obtain sharp stability requirements
 - Account for the unbounded parts
 - How to deal with the existence of non-symmetric self-similar solutions?
 - Do singularities form or not?
+- Distance comparison rules out higher multiplicity singularities: length must collapse for singularities to form!
