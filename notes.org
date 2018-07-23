@@ -7,7 +7,8 @@
 #+OPTIONS: H:2 toc:nil
 #+LaTeX_CLASS: beamer
 #+LaTeX_CLASS_OPTIONS: [presentation]
-#+BEAMER_THEME: Frankfurt
+#+BEAMER_THEME: UniFreiburg
+
 #+LaTeX_HEADER: \titlegraphic{\includegraphics[height=.4\textheight]{img/csf_networks_selfsim.png}}
 
 #+LaTeX_header: \input{local_defs}
